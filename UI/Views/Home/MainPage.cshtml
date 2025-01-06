@@ -1,0 +1,42 @@
+﻿@model LasMisionesDeTonySoprano.Models.MainPageVM
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+</head>
+<body>
+
+    <form asp-action="MainPage" method="post">
+        <label for="dificultadMision">Selecciona la misión:</label>
+        <select id="dificultadMision" asp-for="DificultadMisionSeleccionada" asp-items="@(new SelectList(Model.ListadoDeMisiones, "Id", "Nombre"))">
+        </select>
+        <button type="submit">Actualizar</button>
+    </form>
+    @if (Model.ListadoDeCandidatosPorMision != null && Model.ListadoDeCandidatosPorMision.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nombre del Candidato</th>
+                    <th>Contacto</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var candidato in Model.ListadoDeCandidatosPorMision)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => candidato.Nombre) @Html.DisplayFor(modelItem => candidato.Apellidos)</td>
+                        <td>
+                            @Html.ActionLink("Contactar.", "SecondPage", new { idCandidato = candidato.Id }, new { @class = "btn btn-warning btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+</body>
+</html>

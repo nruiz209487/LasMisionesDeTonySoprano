@@ -1,0 +1,57 @@
+﻿@model LasMisionesDeTonySoprano.Models.CandidatoConEdad
+
+@{
+    ViewData["Title"] = "SecondPage";
+}
+
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        Datos del Candidato: @Html.DisplayFor(model => model.Nombre)
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Apellidos)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Apellidos)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Edad)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Edad) anyos
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Direccion)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Direccion)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Telefono)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Telefono)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Precio)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Precio) $
+            </dd>
+        </dl>
+        @Html.ActionLink("Volver Atras.", "MainPage")
+    </div>
+</div>

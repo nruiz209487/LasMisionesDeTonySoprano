@@ -1,0 +1,64 @@
+﻿@model LasMisionesDeTonySoprano.Models.MainPageVM
+
+@{
+    ViewData["Title"] = "MainPageVM";
+}
+
+<div class="container">
+    <h1>Gestión de Misiones</h1>
+
+    <!-- Formulario para seleccionar la misión -->
+    <form method="post">
+        <div class="form-group">
+            <label for="misionesDropdown">Seleccione una misión:</label>
+            <select id="misionesDropdown" class="form-control" name="misionId" onchange="this.form.submit()">
+                <option value="">-- Seleccionar --</option>
+                @foreach (var mision in Model.ListadoDeMisiones)
+                {
+                    <option value="@mision.Id" @(Model.MisionSeleccionada?.Id == mision.Id ? "selected" : "")>
+                        @mision.Nombre
+                    </option>
+                }
+            </select>
+        </div>
+    </form>
+
+    <!-- Mostrar candidatos si hay una misión seleccionada -->
+    @if (Model.MisionSeleccionada != null)
+    {
+        <h2>Candidatos para la misión: @Model.MisionSeleccionada.Nombre</h2>
+
+        @if (Model.ListadoDeCandidatosPorMision.Any())
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Habilidad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var candidato in Model.ListadoDeCandidatosPorMision)
+                    {
+                        <tr>
+                            <td>@candidato.Nombre</td>
+                            <td>@candidato.Habilidad</td>
+                            <td>
+                                <a href="@Url.Action("DetallesCandidato", "Misiones", new { id = candidato.Id })" class="btn btn-primary">Detalles</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No hay candidatos disponibles para esta misión.</p>
+        }
+    }
+    else
+    {
+        <p>Seleccione una misión para ver los candidatos.</p>
+    }
+</div>
